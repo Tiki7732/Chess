@@ -51,4 +51,6 @@ class Board
 
 end
 
+b = Board.new
+b.show_board
 
