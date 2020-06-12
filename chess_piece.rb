@@ -16,7 +16,7 @@ class Piece
     end
 
     def to_s
-        color
+        symbol.to_s
     end
 
     def moves
@@ -28,7 +28,7 @@ class Piece
     end
 
     def symbol
-
+        color
     end
 
     private
@@ -38,4 +38,3 @@ class Piece
     end
 
 end
-
