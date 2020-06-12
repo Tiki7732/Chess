@@ -1,5 +1,4 @@
-require_relative 'chess_piece'
-require_relative 'rook_piece'
+require_relative 'pieces'
 class Board
 
     def populate_board
