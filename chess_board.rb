@@ -1,12 +1,20 @@
+require_relative 'chess_piece'
 class Board
-    private
-    attr_reader :sentinel
+
+    def make_board
+        grid = Array.new(8) {Array.new(8)}
+        grid[0].each { |space| space = Piece.new("black") }
+        grid
+    end
 
     public
     attr_reader :grid
 
     def initialize
-        @grid = Array.new(8) {Array.new(8)}
-        
+        @grid = self.make_board
+
     end
+
 end
+
+b = Board.new
