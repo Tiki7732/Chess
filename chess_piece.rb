@@ -1,3 +1,11 @@
+module Slideable
+
+end
+
+module Stepable
+
+end
+
 class Piece
 
     attr_reader :color, :board, :pos
@@ -30,3 +38,4 @@ class Piece
     end
 
 end
+
