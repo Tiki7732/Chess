@@ -1,4 +1,4 @@
-require_relative 'chess_piece'
+require_relative 'piece'
 require_relative 'slideable'
 require 'colorize'
 class Rook < Piece
