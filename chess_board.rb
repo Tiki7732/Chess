@@ -33,7 +33,6 @@ class Board
         piece = self[start_pos]
         self[start_pos] = nil
         self[end_pos] = piece
-
     end
 
     def valid_pos?(pos)
