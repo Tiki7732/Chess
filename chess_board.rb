@@ -1,18 +1,17 @@
 require_relative 'chess_piece'
 class Board
 
-    def make_board
-        grid = Array.new(8) {Array.new(8)}
-        grid[0].each { |space| space = Piece.new("black") }
-        grid
+    def populate_board
+        grid[0].map! { |space| space = Piece.new("black") }
+    
     end
 
     public
     attr_reader :grid
 
     def initialize
-        @grid = self.make_board
-
+        @grid = Array.new(8) {Array.new(8)}
+        self.populate_board
     end
 
 end
