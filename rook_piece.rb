@@ -1,17 +1,17 @@
+require_relative 'chess_piece'
+require_relative 'slideable'
 class Rook < Piece
     include Slideable
 
     attr_reader :color, :board, :pos
-    def initialize(color, board, pos)
-        super(color, board, pos)
-    end
+ 
 
     def symbol 
-        :Rook
+        '♜'.colorize(color)
     end
-    
+
     protected
     def move_dirs
-        
+        horizontal_and_verical
     end
 end
