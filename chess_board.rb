@@ -3,10 +3,10 @@ class Board
 
     def populate_board
         grid = Array.new(8) {Array.new(8)}
-        grid[0].map! { |space| space = Piece.new("black") }
-        grid[1].map! { |space| space = Piece.new("black") }
-        grid[6].map! { |space| space = Piece.new("White") }
-        grid[7].map! { |space| space = Piece.new("White") }
+        grid[0].each_index { |ind| grid[0][ind] = Piece.new("black", self, [0, ind]) }
+        grid[1].each_index { |ind| grid[1][ind] = Piece.new("black", self, [1, ind]) }
+        grid[6].each_index { |ind| grid[6][ind] = Piece.new("white", self, [6, ind]) }
+        grid[7].each_index { |ind| grid[7][ind] = Piece.new("white", self, [7, ind]) }
         grid
     end
 
@@ -40,6 +40,13 @@ class Board
         return false if !x.between?(0, 7)
         return false if !y.between?(0, 7)
         true
+    end
+
+    def show_board
+        grid.each do |row|
+            row.each {|space| print space.to_s + " "}
+            print "\n"
+        end
     end
 
 end
