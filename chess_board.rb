@@ -1,4 +1,5 @@
 require_relative 'pieces'
+require 'colorize'
 class Board
 
     def populate_board
@@ -54,9 +55,18 @@ class Board
         end
     end
 
+    def add_piece(piece, pos)
+        self[pos] = piece if valid_pos?(pos) && empty?(pos)
+    end
+
+
 end
 
 b = Board.new
+r = Rook.new(:green, b, [0,0])
+b.add_piece(r, r.pos)
+
+r2 = Rook.new(:blue, b, [1,0])
+b.add_piece(r2, r2.pos)
 b.show_board
-r = Rook.new("black", b, [0,0])
 p r.moves
