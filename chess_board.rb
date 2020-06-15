@@ -68,13 +68,16 @@ b.add_piece(r, r.pos)
 
 r2 = Rook.new(:blue, b, [7,0])
 b.add_piece(r2, r2.pos)
-q = Queen.new(:green, b, [0,4])
+q = Queen.new(:green, b, [0,3])
 b.add_piece(q, q.pos)
 
-bishop = Bishop.new(:green, b, [0,3])
+bishop = Bishop.new(:green, b, [0,2])
+k = Knight.new(:green, b, [0,1])
+b.add_piece(k, k.pos)
 b.add_piece(bishop, bishop.pos)
 b.show_board
-p r.moves
-p bishop.moves
-p r2. moves
-p q.moves
+# p r.moves
+# p bishop.moves
+# p r2.moves
+# p q.moves
+p k.moves
