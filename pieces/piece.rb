@@ -24,6 +24,10 @@ class Piece
         color
     end
 
+    def empty?
+        false
+    end
+
     private
 
     def moves_into_check?(end_pos)

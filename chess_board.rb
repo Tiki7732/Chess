@@ -24,6 +24,8 @@ class Board
         raise "No piece at this position" if self[start_pos].nil?
         raise "Can't move there!" if !valid_pos?(end_pos)
         piece = self[start_pos]
+        raise "Piece doesn't move like that" if !piece.moves.include?(end_pos)
+        
         self[start_pos] = nil
         self[end_pos] = piece
     end
@@ -77,6 +79,14 @@ class Board
 end
 
 b = Board.new
+b.show_board
+pos = [6,0]
+p b[pos].moves
+b.move_piece([6,0], [4,0])
+b.show_board
+pos = [4,0]
+p b[pos].moves
+b.move_piece([4,0], [3,0])
 b.show_board
 #p b.empty?([2,0])
 # r = Rook.new(:green, b, [0,0])
