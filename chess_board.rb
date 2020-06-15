@@ -73,6 +73,8 @@ b.add_piece(q, q.pos)
 
 bishop = Bishop.new(:green, b, [0,2])
 k = Knight.new(:green, b, [0,1])
+king = King.new(:green, b, [0,4])
+b.add_piece(king, king.pos)
 b.add_piece(k, k.pos)
 b.add_piece(bishop, bishop.pos)
 b.show_board
@@ -80,4 +82,4 @@ b.show_board
 # p bishop.moves
 # p r2.moves
 # p q.moves
-p k.moves
+p king.moves
