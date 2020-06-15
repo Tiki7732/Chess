@@ -41,14 +41,14 @@ class Board
 
     def populate_board
        
-        [:red, :green].each do |color|
+        [:white, :black].each do |color|
             fill_back_row(color)
             fill_pawn_row(color)
         end
     end
 
     def fill_back_row(color)
-        start_row = color == :red ? 7 : 0
+        start_row = color == :white ? 7 : 0
         back_row = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
         grid[start_row].map!.with_index do |piece, ind|
             piece = back_row[ind].new(color, self, [start_row, ind])
@@ -56,7 +56,7 @@ class Board
     end
 
     def fill_pawn_row(color)
-        start_row = color == :red ? 6 : 1
+        start_row = color == :white ? 6 : 1
         8.times do |num| 
             grid[start_row][num] = Pawn.new(color, self, [start_row, num])
         end
