@@ -37,4 +37,12 @@ class Pawn < Piece
         moves
     end
 
+    def attack
+        x, y = pos
+        attack_pos = [[x + forward_step, y + 1], [x + forward_step, y - 1]
+        attack_pos.reject!{|pos| pos if !board.valid_pos?(pos)}
+        attack_pos.reject!{|pos| pos if board.empty?(pos)}
+        attack_pos.reject!{|pos| pos if board[pos].color == color}
+    end
+
 end
