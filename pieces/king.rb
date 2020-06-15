@@ -11,8 +11,8 @@ class King < Piece
     end
 
     protected
-    def move_diffs
-        moves = [[-1,-1], [-1,1], [-1,0], [1, -1], [1,1], [1, 0], [0, -1], [0, 1]
+    def moves_diff
+        moves = [[-1,-1], [-1,1], [-1,0], [1, -1], [1,1], [1, 0], [0, -1], [0, 1]]
         moves
     end
 end
