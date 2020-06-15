@@ -1,3 +1,40 @@
+require_relative "piece"
+require 'colorize'
+
 class Pawn < Piece
+
+    def symbol
+        '♟'.colorize(color)
+    end
+
+    def moves
+        forward + attack
+    end
+
+    private
+
+    def forward_step
+        color == :white ? -1 : 1
+    end
+
+    def start_line?
+        if color == :white && pos[0] == 6
+            return true
+        elsif color == :black && pos[0] == 1
+            return true
+        else
+            return false
+        end
+
+    def forward
+        x, y = pos
+        two_steps = [x + (2 * forward_step), y]
+        one_step = [x + forward_step, y]
+        moves = []
+        return unless board.valid_pos?(one_step) && board.empty?(one_step)
+        moves.push(one_step)
+        moves.push(two_steps) if board.emtpy?(two_steps) && start_line?
+        moves
+    end
 
 end
