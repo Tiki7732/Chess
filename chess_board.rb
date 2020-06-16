@@ -7,7 +7,7 @@ class Board
     def initialize
         @sentinel = NullPiece.instance
         @grid = Array.new(8) {Array.new(8, sentinel)}
-        self.populate_board
+        populate_board
     end
 
     def [](pos)
@@ -26,7 +26,7 @@ class Board
         piece = self[start_pos]
         
         
-        self[start_pos] = nil
+        self[start_pos] = sentinel
         self[end_pos] = piece
         piece.pos = end_pos
     end
@@ -90,17 +90,19 @@ end
 
 b = Board.new
 b.show_board
-pos = [6,0]
+pos = [7,1]
 p b[pos].moves
-b.move_piece([6,0], [4,0])
+b.move_piece([7,1], [5,2])
 b.show_board
-pos = [4,0]
+pos = [5,2]
 p b[pos].moves
-b.move_piece([4,0], [3,0])
+b.move_piece([5,2], [3,3])
 b.show_board
-b.move_piece([3,0], [2,0])
+pos = [3,3]
+p b[pos].moves
+b.move_piece([3,3], [1,2])
 b.show_board
-pos = [2,0]
+pos = [1,2]
 p b[pos].moves
 
 # pawn = Pawn.new(:green, b, [3, 2])
