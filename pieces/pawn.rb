@@ -18,14 +18,14 @@ private
         two_steps = [x + (2 * forward_step), y]
         one_step = [x + forward_step, y]
         moves = []
-        return unless board.valid_pos?(one_step) && board.empty?(one_step)
+        return moves unless board.valid_pos?(one_step) && board.empty?(one_step)
         moves.push(one_step)
         moves.push(two_steps) if board.empty?(two_steps) && start_line?
         moves
     end
 
     def attack
-        x, y = pos
+        x, y = @pos
         attack_pos = [[x + forward_step, y + 1], [x + forward_step, y - 1]]
         attack_pos.reject!{|pos| pos if !board.valid_pos?(pos)}
         attack_pos.reject!{|pos| pos if board.empty?(pos)}
