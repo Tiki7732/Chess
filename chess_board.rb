@@ -21,14 +21,24 @@ class Board
     end
 
     def move_piece(start_pos, end_pos)
+        turn_color = nil
+        perform_move_checks(start_pos, end_pos, turn_color)
+        piece = self[start_pos]
+        
+        
+        self[start_pos] = nil
+        self[end_pos] = piece
+        piece.pos = end_pos
+    end
+
+    def perform_move_checks(start_pos, end_pos, turn_color)
         raise "No piece at this position" if self[start_pos].nil?
         raise "Can't move there!" if !valid_pos?(end_pos)
         piece = self[start_pos]
         raise "Piece doesn't move like that" if !piece.moves.include?(end_pos)
-        
-        self[start_pos] = nil
-        self[end_pos] = piece
+        #raise "It's the other players turn" if piece.color != turn_color
     end
+
 
     def valid_pos?(pos)
         x, y = pos[0], pos[1]
@@ -52,8 +62,8 @@ class Board
     def fill_back_row(color)
         start_row = color == :white ? 7 : 0
         back_row = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
-        grid[start_row].map!.with_index do |piece, ind|
-            piece = back_row[ind].new(color, self, [start_row, ind])
+        back_row.each_with_index do |piece, ind|
+           piece.new(color, self, [start_row, ind])
         end
     end
 
@@ -88,6 +98,18 @@ pos = [4,0]
 p b[pos].moves
 b.move_piece([4,0], [3,0])
 b.show_board
+b.move_piece([3,0], [2,0])
+b.show_board
+pos = [2,0]
+p b[pos].moves
+
+# pawn = Pawn.new(:green, b, [3, 2])
+# p pawn.pos
+# p pawn.moves
+# new_pos = [4,2]
+# pawn.pos = new_pos
+# p pawn.pos
+# p pawn.moves
 #p b.empty?([2,0])
 # r = Rook.new(:green, b, [0,0])
 # b.add_piece(r, r.pos)
