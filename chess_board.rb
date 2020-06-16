@@ -24,8 +24,6 @@ class Board
         turn_color = nil
         perform_move_checks(start_pos, end_pos, turn_color)
         piece = self[start_pos]
-        
-        
         self[start_pos] = sentinel
         self[end_pos] = piece
         piece.pos = end_pos
@@ -88,22 +86,29 @@ class Board
 
 end
 
-b = Board.new
-b.show_board
-pos = [7,1]
-p b[pos].moves
-b.move_piece([7,1], [5,2])
-b.show_board
-pos = [5,2]
-p b[pos].moves
-b.move_piece([5,2], [3,3])
-b.show_board
-pos = [3,3]
-p b[pos].moves
-b.move_piece([3,3], [1,2])
-b.show_board
-pos = [1,2]
-p b[pos].moves
+# b = Board.new
+# b.show_board
+# pos = [7,2]
+# p b[pos].moves
+# b.move_piece([6,3], [4,3])
+# b.move_piece([7,2], [3,6])
+# b.show_board
+# pos = [3,6]
+# p b[pos].moves
+# b.move_piece([3,6], [1,4])
+# b.show_board
+# pos = [1,4]
+# p b[pos].moves
+# b.move_piece([7,3], [5,3])
+# b.show_board
+# b.move_piece([5,3], [2,6])
+# b.show_board
+# b.move_piece([2,6],[1,5])
+# b.show_board
+# b.move_piece([3,3], [1,2])
+# b.show_board
+# pos = [1,2]
+# p b[pos].moves
 
 # pawn = Pawn.new(:green, b, [3, 2])
 # p pawn.pos
