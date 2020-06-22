@@ -101,7 +101,7 @@ class Cursor
     current_x, current_y = @cursor_pos 
     change_x, change_y = diff
     new_pos = [current_x + change_x, current_y + change_y]
-    @cursor_pos = new_pos
+    @cursor_pos = new_pos if @board.valid_pos?(new_pos)
   end
 end
 
