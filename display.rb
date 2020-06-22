@@ -11,15 +11,31 @@ class Display
         @cursor = Cursor.new([0,0], board)
     end
 
-    def show_board
-        @board.show_board
+    def render
+        
+        @board.grid.each.with_index do |row, ind_1|
+            row.each.with_index {|space, ind_2| print space.to_s.colorize(pos_color([ind_1, ind_2]))}
+            print "\n"
+        end
         @cursor.get_input
+    end
+
+    def pos_color(pos)
+        x, y = pos
+        if pos == @cursor.cursor_pos
+            bg = :green
+        elsif (x + y).odd? 
+            bg = :light_red
+        else
+            bg = :light_blue
+        end
+        {background: bg}
     end
 end
 
 board = Board.new
 d = Display.new(board)
-d.show_board
+d.render
 # p d.cursor.cursor_pos
 # d.cursor.update_pos([2,2])
 # p d.cursor.cursor_pos
