@@ -17,25 +17,35 @@ class Display
             row.each.with_index {|space, ind_2| print space.to_s.colorize(pos_color([ind_1, ind_2]))}
             print "\n"
         end
-        @cursor.get_input
+        # @cursor.get_input
     end
 
     def pos_color(pos)
         x, y = pos
         if pos == @cursor.cursor_pos
-            bg = :green
-        elsif (x + y).odd? 
             bg = :light_red
+        elsif (x + y).odd? 
+            bg = :light_cyan
         else
-            bg = :light_blue
+            bg = :blue
         end
         {background: bg}
+    end
+
+    def display_loop
+        quit = false
+        until quit
+            self.render
+            input = @cursor.get_input
+            quit = true if input == 'quit'
+            system('clear')
+        end
     end
 end
 
 board = Board.new
 d = Display.new(board)
-d.render
+d.display_loop
 # p d.cursor.cursor_pos
 # d.cursor.update_pos([2,2])
 # p d.cursor.cursor_pos
