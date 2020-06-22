@@ -83,6 +83,22 @@ class Board
         self[pos] = piece if valid_pos?(pos) && empty?(pos)
     end
 
+    def in_check?(color)
+        piece = self[find_king(color)]
+        puts piece.to_s
+    end
 
+    def find_king(color)
+        grid.each do |row|
+            row.each do |piece| 
+                if piece.color == color && piece.is_a?(King)
+                    return piece.pos
+                end
+            end
+        end
+    end
+    
 end
 
+board = Board.new
+board.in_check?(:white)
