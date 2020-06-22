@@ -83,7 +83,15 @@ class Cursor
         return @cursor_pos
     when :up
         update_pos(MOVES[:up])
-        p @cursor_pos
+    when :down
+        update_pos(MOVES[:down])
+    when :left
+        update_pos(MOVES[:left])
+    when :right
+        update_pos(MOVES[:right])
+    when :escape
+        Process.exit(0)
+
 
     end
 
