@@ -80,7 +80,7 @@ class Cursor
     when :space
         return @cursor_pos
     when :return
-        return @cursor_pos
+        return true
     when :up
         update_pos(MOVES[:up])
     when :down
