@@ -91,8 +91,8 @@ class Cursor
         update_pos(MOVES[:right])
     when :escape
         Process.exit(0)
-
-
+    when :backspace
+        return 'quit'
     end
 
   end
