@@ -23,7 +23,7 @@ class Display
     def pos_color(pos)
         x, y = pos
         if pos == @cursor.cursor_pos
-          bg = @selected ?  :magenta : :yellow
+          bg = @selected ? :yellow : :magenta
            #bg = :magenta
         elsif (x + y).odd? 
             bg = :light_cyan
