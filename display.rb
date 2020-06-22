@@ -9,10 +9,10 @@ class Display
     def initialize(board)
         @board = board
         @cursor = Cursor.new([0,0], board)
+        @selected = false
     end
 
     def render
-        
         @board.grid.each.with_index do |row, ind_1|
             row.each.with_index {|space, ind_2| print space.to_s.colorize(pos_color([ind_1, ind_2]))}
             print "\n"
@@ -23,7 +23,8 @@ class Display
     def pos_color(pos)
         x, y = pos
         if pos == @cursor.cursor_pos
-            bg = :light_red
+          bg = @selected ?  :magenta : :yellow
+           #bg = :magenta
         elsif (x + y).odd? 
             bg = :light_cyan
         else
@@ -38,6 +39,7 @@ class Display
             self.render
             input = @cursor.get_input
             quit = true if input == 'quit'
+            @selected = !@selected if input == true
             system('clear')
         end
     end
