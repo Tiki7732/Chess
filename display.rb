@@ -36,11 +36,12 @@ class Display
     def display_loop
         quit = false
         until quit
+            system('clear')
             self.render
             input = @cursor.get_input
             quit = true if input == 'quit'
             @selected = !@selected if input == true
-            system('clear')
+            
         end
     end
 end
