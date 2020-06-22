@@ -46,9 +46,9 @@ class Display
     end
 end
 
-board = Board.new
-d = Display.new(board)
-d.display_loop
+# board = Board.new
+# d = Display.new(board)
+# d.display_loop
 # p d.cursor.cursor_pos
 # d.cursor.update_pos([2,2])
 # p d.cursor.cursor_pos
