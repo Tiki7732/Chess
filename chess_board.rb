@@ -72,6 +72,10 @@ class Board
         print "  a b c d e f g h" + "\n"
     end
 
+    def dup_board
+        duplicate
+    end
+
     private
 
     def perform_move_checks(start_pos, end_pos, turn_color)
@@ -105,7 +109,8 @@ class Board
     def duplicate
         dup_board = Board.new(false)
         pieces = find_pieces(:white) + find_pieces(:black)
-        pieces.each {|piece| piece.Class.new(piece.color, dup_board, piece.pos)}
+        pieces.each {|piece| piece.class.new(piece.color, dup_board, piece.pos)}
+        dup_board
     end
 
     def find_pieces(color)
@@ -120,13 +125,17 @@ class Board
 
 end
 
-board = Board.new
-board.show_board
-board.move_piece([6,5], [4,5])
-board.show_board
-board.move_piece([1,4], [3,4])
-board.show_board
-board.move_piece([0, 3], [4,7])
-board.show_board
-p board.in_check?(:white)
+# board = Board.new
+# board.show_board
+# board.move_piece([6,5], [4,5])
+# board.show_board
+# board.move_piece([1,4], [3,4])
+# board.show_board
+# board.move_piece([0, 3], [4,7])
+# board.show_board
+# p board.in_check?(:white)
+# new_board = board.dup_board
+# board.move_piece([4,7], [3,7])
+# board.show_board
+# new_board.show_board
 #board.get_pieces
