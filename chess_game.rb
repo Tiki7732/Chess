@@ -12,7 +12,12 @@ class Game
         @current_player = :white
     end
 
-    def switch_players(color)
-        color == :black ? :white : :black
+    def switch_players()
+        @current_player = @current_player == :black ? :white : :black
+    end
+
+    def play
+        until board.checkmate?(@current_player)
+            
     end
 end
