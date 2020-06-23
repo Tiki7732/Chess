@@ -30,8 +30,16 @@ class Board
     end
 
     def checkmate?(color)
-        false unless in_check?(color)
-        true unless valid_moves?(color)
+        return false unless in_check?(color)
+        pieces = find_pieces(color)
+        # pieces.each do |piece| 
+        #     puts piece.to_s
+        #     p piece.moves 
+        #     p  "---"
+        #     p piece.valid_moves?
+        #end
+       
+        pieces.all?{|piece| piece.valid_moves?.empty?}
     end
 
     def in_check?(color)
@@ -72,8 +80,11 @@ class Board
         print "   a  b  c  d  e  f  g  h" + "\n"
     end
 
-    def dup_board
-        duplicate
+    def duplicate
+        dup_board = Board.new(false)
+        pieces = find_pieces(:white) + find_pieces(:black)
+        pieces.each {|piece| piece.class.new(piece.color, dup_board, piece.pos)}
+        dup_board
     end
 
     private
@@ -106,12 +117,6 @@ class Board
         8.times { |num| grid[start_row][num] = Pawn.new(color, self, [start_row, num]) }
     end
 
-    def duplicate
-        dup_board = Board.new(false)
-        pieces = find_pieces(:white) + find_pieces(:black)
-        pieces.each {|piece| piece.class.new(piece.color, dup_board, piece.pos)}
-        dup_board
-    end
 
     def find_pieces(color)
         one_side = []
@@ -129,13 +134,21 @@ board = Board.new
 board.show_board
 board.move_piece([6,5], [4,5])
 board.show_board
+
 board.move_piece([1,4], [3,4])
 board.show_board
-board.move_piece([0, 3], [4,7])
+board.move_piece([6,6], [4,6])
 board.show_board
 p board.in_check?(:white)
-new_board = board.dup_board
-board.move_piece([4,7], [3,7])
+# new_board = board.duplicate
+board.move_piece([0,3], [4,7])
+# pos = [7,7]
+
+# p board[pos].moves
+# puts board[pos].to_s
+# p "---"
 board.show_board
-new_board.show_board
+p board.in_check?(:white)
+ p board.checkmate?(:white)
+ p board.in_check?(:black)
 #board.get_pieces
