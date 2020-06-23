@@ -29,14 +29,20 @@ class Board
         piece.pos = end_pos
     end
 
-    def perform_move_checks(start_pos, end_pos, turn_color)
-        raise "No piece at this position" if self[start_pos].nil?
-        raise "Can't move there!" if !valid_pos?(end_pos)
-        piece = self[start_pos]
-        raise "Piece doesn't move like that" if !piece.moves.include?(end_pos)
-        #raise "It's the other players turn" if piece.color != turn_color
+    def checkmate?(color)
+        false unless in_check?(color)
+        true unless valid_moves?(color)
     end
 
+    def in_check?(color)
+        king = self[find_king(color)]
+        other_color = color == :black ? :white : :black
+        pieces = find_pieces(other_color)
+        pieces.each do |piece|
+            return true if piece.moves.any?{|pos| pos == king.pos}
+        end
+        false
+    end
 
     def valid_pos?(pos)
         x, y = pos[0], pos[1]
@@ -47,6 +53,33 @@ class Board
 
     def empty?(pos)
         self[pos].empty?
+    end
+
+    def add_piece(piece, pos)
+        self[pos] = piece if valid_pos?(pos) && empty?(pos)
+    end
+
+    def show_board
+        print "  a b c d e f g h" + "\n"
+        rows = grid.length
+        grid.each do |row|
+            print rows.to_s + " "
+            row.each {|space| print space.to_s + " "}
+            print rows.to_s
+            rows -= 1
+            print "\n"
+        end
+        print "  a b c d e f g h" + "\n"
+    end
+
+    private
+
+    def perform_move_checks(start_pos, end_pos, turn_color)
+        raise "No piece at this position" if self[start_pos].nil?
+        raise "Can't move there!" if !valid_pos?(end_pos)
+        piece = self[start_pos]
+        raise "Piece doesn't move like that" if !piece.moves.include?(end_pos)
+        #raise "It's the other players turn" if piece.color != turn_color
     end
 
     def populate_board
@@ -71,22 +104,9 @@ class Board
         end
     end
 
-    def show_board
-        print "  a b c d e f g h" + "\n"
-        rows = grid.length
-        grid.each do |row|
-            print rows.to_s + " "
-            row.each {|space| print space.to_s + " "}
-            print rows.to_s
-            rows -= 1
-            print "\n"
-        end
-        print "  a b c d e f g h" + "\n"
-    end
 
-    def add_piece(piece, pos)
-        self[pos] = piece if valid_pos?(pos) && empty?(pos)
-    end
+
+
 
     def find_pieces(color)
         one_side = []
@@ -96,15 +116,7 @@ class Board
         one_side
     end
 
-    def in_check?(color)
-        king = self[find_king(color)]
-        other_color = color == :black ? :white : :black
-        pieces = find_pieces(other_color)
-        pieces.each do |piece|
-            return true if piece.moves.any?{|pos| pos == king.pos}
-        end
-        false
-    end
+
 
     def find_king(color)
         grid.each do |row|
@@ -116,10 +128,7 @@ class Board
         end
     end
 
-    def checkmate?(color)
-        false unless in_check?(color)
-        true unless valid_moves?(color)
-    end
+
     
 end
 
