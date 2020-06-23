@@ -21,8 +21,14 @@ class Board
     end
 
     def move_piece(start_pos, end_pos)
-        turn_color = nil
-        perform_move_checks(start_pos, end_pos, turn_color)
+        perform_move_checks(start_pos, end_pos)
+        piece = self[start_pos]
+        self[start_pos] = sentinel
+        self[end_pos] = piece
+        piece.pos = end_pos
+    end
+
+    def move_piece!(start_pos, end_pos)
         piece = self[start_pos]
         self[start_pos] = sentinel
         self[end_pos] = piece
@@ -32,13 +38,6 @@ class Board
     def checkmate?(color)
         return false unless in_check?(color)
         pieces = find_pieces(color)
-        # pieces.each do |piece| 
-        #     puts piece.to_s
-        #     p piece.moves 
-        #     p  "---"
-        #     p piece.valid_moves?
-        #end
-       
         pieces.all?{|piece| piece.valid_moves?.empty?}
     end
 
@@ -89,11 +88,12 @@ class Board
 
     private
 
-    def perform_move_checks(start_pos, end_pos, turn_color)
+    def perform_move_checks(start_pos, end_pos)
         raise "No piece at this position" if self[start_pos].nil?
         raise "Can't move there!" if !valid_pos?(end_pos)
         piece = self[start_pos]
         raise "Piece doesn't move like that" if !piece.moves.include?(end_pos)
+        raise "That move puts you in check!" if piece.valid_moves?.empty?
         #raise "It's the other players turn" if piece.color != turn_color
     end
 
