@@ -72,11 +72,6 @@ class Board
         print "  a b c d e f g h" + "\n"
     end
 
-    def get_pieces
-        pieces = find_pieces(:black) + find_pieces(:white)
-        pieces.each {|piece| puts piece.to_s}
-    end
-
     private
 
     def perform_move_checks(start_pos, end_pos, turn_color)
@@ -99,22 +94,18 @@ class Board
     def fill_back_row(color)
         start_row = color == :white ? 7 : 0
         back_row = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
-        back_row.each_with_index do |piece, ind|
-           piece.new(color, self, [start_row, ind])
-        end
+        back_row.each_with_index { |piece, ind| piece.new(color, self, [start_row, ind]) }
     end
 
     def fill_pawn_row(color)
         start_row = color == :white ? 6 : 1
-        8.times do |num| 
-            grid[start_row][num] = Pawn.new(color, self, [start_row, num])
-        end
+        8.times { |num| grid[start_row][num] = Pawn.new(color, self, [start_row, num]) }
     end
 
     def duplicate
         dup_board = Board.new(false)
         pieces = find_pieces(:white) + find_pieces(:black)
-
+        pieces.each {|piece| piece.Class.new(piece.color, dup_board, piece.pos)}
     end
 
     def find_pieces(color)
@@ -124,24 +115,18 @@ class Board
     end
 
     def find_king(color)
-        grid.each do |row|
-            row.each do |piece| 
-                if piece.color == color && piece.is_a?(King)
-                    return piece.pos
-                end
-            end
-        end
+        grid.flatten.each {|piece| return piece.pos if piece.color == color && piece.is_a?(King)}
     end
 
 end
 
 board = Board.new
-# board.show_board
-# board.move_piece([6,5], [4,5])
-# board.show_board
-# board.move_piece([1,4], [3,4])
-# board.show_board
-# board.move_piece([0, 3], [4,7])
-# board.show_board
-# p board.in_check?(:white)
-board.get_pieces
+board.show_board
+board.move_piece([6,5], [4,5])
+board.show_board
+board.move_piece([1,4], [3,4])
+board.show_board
+board.move_piece([0, 3], [4,7])
+board.show_board
+p board.in_check?(:white)
+#board.get_pieces
