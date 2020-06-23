@@ -13,10 +13,16 @@ class Display
     end
 
     def render
+        print "  abcdefgh" + "\n"
+        rows = @board.grid.length
         @board.grid.each.with_index do |row, ind_1|
+            print rows.to_s + " "
             row.each.with_index {|space, ind_2| print space.to_s.colorize(pos_color([ind_1, ind_2]))}
+            print rows.to_s
+            rows -= 1
             print "\n"
         end
+        print "  abcdefgh" + "\n"
         # @cursor.get_input
     end
 
@@ -46,8 +52,10 @@ class Display
     end
 end
 
-# board = Board.new
-# d = Display.new(board)
+board = Board.new
+
+d = Display.new(board)
+d.render
 # d.display_loop
 # p d.cursor.cursor_pos
 # d.cursor.update_pos([2,2])
