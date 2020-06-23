@@ -4,10 +4,10 @@ class Board
 
     attr_reader :grid, :sentinel
 
-    def initialize
+    def initialize(populate = true)
         @sentinel = NullPiece.instance
         @grid = Array.new(8) {Array.new(8, sentinel)}
-        populate_board
+        populate_board(populate)
     end
 
     def [](pos)
@@ -82,10 +82,12 @@ class Board
         #raise "It's the other players turn" if piece.color != turn_color
     end
 
-    def populate_board
-        [:white, :black].each do |color|
-            fill_back_row(color)
-            fill_pawn_row(color)
+    def populate_board(populate)
+        if populate
+            [:white, :black].each do |color|
+                fill_back_row(color)
+                fill_pawn_row(color)
+            end
         end
     end
 
@@ -104,7 +106,11 @@ class Board
         end
     end
 
+    def duplicate
+        dup_board = Board.new(false)
+        pieces = find_pieces(:white) + find_pieces(:black)
 
+    end
 
 
 
@@ -133,11 +139,12 @@ class Board
 end
 
 board = Board.new
-board.show_board
-board.move_piece([6,5], [4,5])
-board.show_board
-board.move_piece([1,4], [3,4])
-board.show_board
-board.move_piece([0, 3], [4,7])
-board.show_board
-p board.in_check?(:white)
+# board.show_board
+# board.move_piece([6,5], [4,5])
+# board.show_board
+# board.move_piece([1,4], [3,4])
+# board.show_board
+# board.move_piece([0, 3], [4,7])
+# board.show_board
+# p board.in_check?(:white)
+board.get_pieces
