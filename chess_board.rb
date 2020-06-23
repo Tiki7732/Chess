@@ -86,27 +86,19 @@ class Board
     def find_pieces(color)
         one_side = []
         grid.each do |row|
-            row.each do |piece| 
-                if piece.color == color 
-                    #puts piece.to_s
-                   one_side.push(piece)
-                end
-            end
+            row.each { |piece| one_side.push(piece) if piece.color == color}
         end
-        p one_side
-        #p pieces
+        one_side
     end
 
     def in_check?(color)
         king = self[find_king(color)]
         other_color = color == :black ? :white : :black
         pieces = find_pieces(other_color)
-         #p pieces
         pieces.each do |piece|
             return true if piece.moves.any?{|pos| pos == king.pos}
         end
         false
-
     end
 
     def find_king(color)
@@ -122,4 +114,4 @@ class Board
 end
 
 board = Board.new
-board.find_pieces(:white)
+p board.in_check?(:white)
