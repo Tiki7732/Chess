@@ -81,18 +81,17 @@ class Cursor
         return @cursor_pos
     when :return
         return true
-    when :up
-        update_pos(MOVES[:up])
-    when :down
-        update_pos(MOVES[:down])
-    when :left
-        update_pos(MOVES[:left])
-    when :right
-        update_pos(MOVES[:right])
-    when :escape
+    when :up, :down, :left, :right
+        update_pos(MOVES[key])
+        nil
+    when :escape 
         Process.exit(0)
     when :backspace
         return 'quit'
+    when :ctrl_c
+        Process.exit(0)
+    else
+        return key
     end
 
   end
