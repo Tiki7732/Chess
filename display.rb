@@ -13,7 +13,7 @@ class Display
     end
 
     def render
-        print "  abcdefgh" + "\n"
+        print "   a  b  c  d  e  f  g  h" + "\n"
         rows = @board.grid.length
         @board.grid.each.with_index do |row, ind_1|
             print rows.to_s + " "
@@ -22,15 +22,13 @@ class Display
             rows -= 1
             print "\n"
         end
-        print "  abcdefgh" + "\n"
-        # @cursor.get_input
+        print "   a  b  c  d  e  f  g  h" + "\n"
     end
 
     def pos_color(pos)
         x, y = pos
         if pos == @cursor.cursor_pos
           bg = @selected ? :yellow : :magenta
-           #bg = :magenta
         elsif (x + y).odd? 
             bg = :light_cyan
         else
@@ -51,3 +49,8 @@ class Display
         end
     end
 end
+
+# board = Board.new
+# display = Display.new(board)
+# display.render
+# display.display_loop
