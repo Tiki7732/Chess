@@ -60,16 +60,16 @@ class Board
     end
 
     def show_board
-        print "  a b c d e f g h" + "\n"
+        print "   a  b  c  d  e  f  g  h" + "\n"
         rows = grid.length
         grid.each do |row|
             print rows.to_s + " "
-            row.each {|space| print space.to_s + " "}
+            row.each {|space| print space.to_s}
             print rows.to_s
             rows -= 1
             print "\n"
         end
-        print "  a b c d e f g h" + "\n"
+        print "   a  b  c  d  e  f  g  h" + "\n"
     end
 
     def dup_board
@@ -125,17 +125,17 @@ class Board
 
 end
 
-# board = Board.new
-# board.show_board
-# board.move_piece([6,5], [4,5])
-# board.show_board
-# board.move_piece([1,4], [3,4])
-# board.show_board
-# board.move_piece([0, 3], [4,7])
-# board.show_board
-# p board.in_check?(:white)
-# new_board = board.dup_board
-# board.move_piece([4,7], [3,7])
-# board.show_board
-# new_board.show_board
+board = Board.new
+board.show_board
+board.move_piece([6,5], [4,5])
+board.show_board
+board.move_piece([1,4], [3,4])
+board.show_board
+board.move_piece([0, 3], [4,7])
+board.show_board
+p board.in_check?(:white)
+new_board = board.dup_board
+board.move_piece([4,7], [3,7])
+board.show_board
+new_board.show_board
 #board.get_pieces
