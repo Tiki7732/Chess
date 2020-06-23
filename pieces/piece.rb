@@ -35,7 +35,14 @@ class Piece
     private
 
     def moves_into_check?(end_pos)
+        new_board = @board.duplicate
+        new_board.moves(pos, end_pos)
+        new_board.in_check?(color)
 
+    end
+
+    def valid_moves?
+        moves.reject!{|move| moves_into_check?(move)}
     end
 
 end
