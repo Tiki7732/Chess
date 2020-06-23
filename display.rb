@@ -51,12 +51,3 @@ class Display
         end
     end
 end
-
-board = Board.new
-
-d = Display.new(board)
-d.render
-# d.display_loop
-# p d.cursor.cursor_pos
-# d.cursor.update_pos([2,2])
-# p d.cursor.cursor_pos
