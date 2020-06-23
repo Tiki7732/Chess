@@ -13,7 +13,7 @@ class Piece
     end
 
     def to_s
-        symbol.to_s
+        " #{symbol} "
     end
 
     def moves
@@ -25,7 +25,7 @@ class Piece
     end
 
     def symbol
-        color
+        
     end
 
     def empty?
