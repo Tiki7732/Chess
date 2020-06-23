@@ -73,10 +73,16 @@ class Board
     end
 
     def show_board
+        print "  a b c d e f g h" + "\n"
+        rows = grid.length
         grid.each do |row|
+            print rows.to_s + " "
             row.each {|space| print space.to_s + " "}
+            print rows.to_s
+            rows -= 1
             print "\n"
         end
+        print "  a b c d e f g h" + "\n"
     end
 
     def add_piece(piece, pos)
@@ -113,5 +119,6 @@ class Board
     
 end
 
-board = Board.new
-p board.in_check?(:white)
+# board = Board.new
+# board.show_board
+# p board.in_check?(:white)
