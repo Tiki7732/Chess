@@ -1,10 +1,11 @@
-require_relative 'cursor'
-
 class Player
 
-    def initialize
-
+    def initialize(color, display)
+        @color = color
+        @display = display
     end
 
-    
+    def make_move
+        input = 
+    end
 end
