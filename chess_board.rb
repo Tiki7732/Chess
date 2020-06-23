@@ -72,6 +72,11 @@ class Board
         print "  a b c d e f g h" + "\n"
     end
 
+    def get_pieces
+        pieces = find_pieces(:black) + find_pieces(:white)
+        pieces.each {|piece| puts piece.to_s}
+    end
+
     private
 
     def perform_move_checks(start_pos, end_pos, turn_color)
@@ -112,17 +117,11 @@ class Board
 
     end
 
-
-
     def find_pieces(color)
         one_side = []
-        grid.each do |row|
-            row.each { |piece| one_side.push(piece) if piece.color == color}
-        end
+        grid.flatten.each {|piece| one_side.push(piece) if piece.color == color}
         one_side
     end
-
-
 
     def find_king(color)
         grid.each do |row|
@@ -134,8 +133,6 @@ class Board
         end
     end
 
-
-    
 end
 
 board = Board.new
