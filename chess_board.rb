@@ -50,7 +50,6 @@ class Board
     end
 
     def populate_board
-       
         [:white, :black].each do |color|
             fill_back_row(color)
             fill_pawn_row(color)
@@ -116,9 +115,20 @@ class Board
             end
         end
     end
+
+    def checkmate?(color)
+        false unless in_check?(color)
+        true unless valid_moves?(color)
+    end
     
 end
 
-# board = Board.new
-# board.show_board
-# p board.in_check?(:white)
+board = Board.new
+board.show_board
+board.move_piece([6,5], [4,5])
+board.show_board
+board.move_piece([1,4], [3,4])
+board.show_board
+board.move_piece([0, 3], [4,7])
+board.show_board
+p board.in_check?(:white)
