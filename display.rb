@@ -37,6 +37,11 @@ class Display
         {background: bg}
     end
 
+    def get_input
+        input = @cursor.get_input
+        input
+    end
+
     def display_loop
         quit = false
         until quit
