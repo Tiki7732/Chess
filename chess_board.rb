@@ -20,12 +20,9 @@ class Board
         grid[x][y] = val
     end
 
-    def move_piece(start_pos, end_pos)
-        perform_move_checks(start_pos, end_pos)
-        piece = self[start_pos]
-        self[start_pos] = sentinel
-        self[end_pos] = piece
-        piece.pos = end_pos
+    def move_piece(start_pos, end_pos, color)
+        perform_move_checks(start_pos, end_pos, color)
+        move_piece!(start_pos, end_pos)
     end
 
     def move_piece!(start_pos, end_pos)
@@ -88,13 +85,13 @@ class Board
 
     private
 
-    def perform_move_checks(start_pos, end_pos)
+    def perform_move_checks(start_pos, end_pos, color)
         raise "No piece at this position" if self[start_pos].nil?
         raise "Can't move there!" if !valid_pos?(end_pos)
         piece = self[start_pos]
         raise "Piece doesn't move like that" if !piece.moves.include?(end_pos)
-        raise "That move puts you in check!" if piece.valid_moves?.empty?
-        #raise "It's the other players turn" if piece.color != turn_color
+        raise "That move puts you in check!" if !piece.valid_moves?.include?(end_pos)
+        raise "Can't move opponents piece!" if piece.color != color
     end
 
     def populate_board(populate)
@@ -132,16 +129,17 @@ end
 
 board = Board.new
 board.show_board
-board.move_piece([6,5], [4,5])
+
+board.move_piece([6,5], [4,5], :white)
 board.show_board
 
-board.move_piece([1,4], [3,4])
+board.move_piece([1,4], [3,4], :black)
 board.show_board
-board.move_piece([6,6], [4,6])
+board.move_piece([6,6], [4,6], :white)
 board.show_board
 p board.in_check?(:white)
 # new_board = board.duplicate
-board.move_piece([0,3], [4,7])
+board.move_piece([0,3], [4,7], :black)
 # pos = [7,7]
 
 # p board[pos].moves
