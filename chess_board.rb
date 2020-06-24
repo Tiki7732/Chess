@@ -126,27 +126,3 @@ class Board
     end
 
 end
-
-board = Board.new
-board.show_board
-
-board.move_piece([6,5], [4,5], :white)
-board.show_board
-
-board.move_piece([1,4], [3,4], :black)
-board.show_board
-board.move_piece([6,6], [4,6], :white)
-board.show_board
-p board.in_check?(:white)
-# new_board = board.duplicate
-board.move_piece([0,3], [4,7], :black)
-# pos = [7,7]
-
-# p board[pos].moves
-# puts board[pos].to_s
-# p "---"
-board.show_board
-p board.in_check?(:white)
- p board.checkmate?(:white)
- p board.in_check?(:black)
-#board.get_pieces
