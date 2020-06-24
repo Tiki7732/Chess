@@ -13,6 +13,7 @@ class Display
     end
 
     def render
+        system("clear")
         print "   a  b  c  d  e  f  g  h" + "\n"
         rows = @board.grid.length
         @board.grid.each.with_index do |row, ind_1|
@@ -27,6 +28,7 @@ class Display
 
     def pos_color(pos)
         x, y = pos
+        @selected = cursor.selected
         if pos == @cursor.cursor_pos
           bg = @selected ? :yellow : :magenta
         elsif (x + y).odd? 
@@ -35,11 +37,6 @@ class Display
             bg = :blue
         end
         {background: bg}
-    end
-
-    def get_input
-        input = @cursor.get_input
-        input
     end
 
     def display_loop
@@ -54,8 +51,3 @@ class Display
         end
     end
 end
-
-board = Board.new
-display = Display.new(board)
-display.render
-display.display_loop
