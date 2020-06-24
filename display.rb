@@ -49,13 +49,13 @@ class Display
             self.render
             input = @cursor.get_input
             quit = true if input == 'quit'
-            @selected = !@selected if input == true
+            @selected = @cursor.selected
             
         end
     end
 end
 
-# board = Board.new
-# display = Display.new(board)
-# display.render
-# display.display_loop
+board = Board.new
+display = Display.new(board)
+display.render
+display.display_loop
